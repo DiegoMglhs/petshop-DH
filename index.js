@@ -38,7 +38,26 @@ let pets = [
     }
 ];
 
-vacinarPet = (pet) => {
+const novoCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
+    novoPet = {
+        nome: nome,
+        tipo: tipo,
+        idade: idade,
+        raca: raca,
+        peso: peso,
+        tutor: tutor,
+        contato: contato,
+        vacinado: vacinado,
+        servicos: []
+    }
+
+    pets.push(novoPet);
+    return pets
+}
+
+novoCliente('Arnaldo', 'Porco', 12, 'sem-mundial', 32, 'Guilherme', '(11) 98655-2458', false );
+
+const vacinarPet = (pet) => {
     if (!pet.vacinado) {
         pet.vacinado = true;
         console.log(`O pet  ${pet.nome} foi vacinado!`)
