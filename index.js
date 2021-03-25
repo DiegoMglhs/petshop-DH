@@ -48,12 +48,10 @@ vacinarPet = (pet) => {
 }
 
 const campanhaVacina = (pets) => {
-    var pets_vacinados = 0
-    for(let pet of pets){
-        if (!pet.vacinado) pets_vacinados++;
+    petsParaVacinar = pets.filter(pets => pets.vacinado === false);//usado comando filter para filtrar apenas os não vacidados, mas poderia ser substituido por um for dentro do for of.
+    for(let pet of pets)
         vacinarPet(pet);
-    }
-    console.log (`${pets_vacinados}, pets foram vaciados nessa campanha!`);
+    console.log (`${petsParaVacinar.length}, pets foram vaciados nessa campanha!`);
 }
 
 campanhaVacina(pets);
