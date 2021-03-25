@@ -1,3 +1,5 @@
+var moment = require('moment'); // require
+
 const nomePetshop = "PETSHOP DH";
 
 let pets = [
@@ -11,7 +13,7 @@ let pets = [
         tutor: 'Cebolinha',
         contato: '(81) 998899-4545',
         vacinado: false,
-        servicos: ['banho', 'tosa']
+        servicos: ['tosa']
 
     },
     {
@@ -34,7 +36,7 @@ let pets = [
         tutor: 'George',
         contato: '(81) 99688-9568',
         vacinado: false,
-        servicos: ['banho', 'Corte de unhas']
+        servicos: ['Corte de unhas']
     }
 ];
 
@@ -55,8 +57,8 @@ const novoCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, se
     return pets
 }
 
-novoCliente('Arnaldo', 'Porco', 12, 'sem-mundial', 32, 'Guilherme', '(11) 98655-2458', false );
-
+novoCliente('Arnaldo', 'Porco', 12, 'sem-mundial', 32, 'Guilherme', '(11) 98655-2458', false, [] );
+console.log(pets[pets.length-1]);
 const vacinarPet = (pet) => {
     if (!pet.vacinado) {
         pet.vacinado = true;
@@ -74,3 +76,35 @@ const campanhaVacina = (pets) => {
 }
 
 campanhaVacina(pets);
+
+const darBanhoPet = (pet) => {
+    if(!pet.servicos.includes('banho')){
+        pet.servicos.push('banho');
+        console.log(pet.nome+' está de banho toamdo! ')
+        console.log(moment().format("L - LTS"));
+    }
+}
+
+const tosarPet = (pet) => {
+    if(!pet.servicos.includes('tosa')){
+        pet.servicos.push('tosa');
+        console.log(pet.nome + ' está com cabelinho na régua! ')
+        console.log(moment().format("L - LTS"));
+    }
+}
+
+const apararUnhasPet = (pet) => {
+    if(!pet.servicos.includes('unha')){
+        pet.servicos.push('unha');
+        console.log(pet.nome + ' está com as unhas cortadas! ')
+        console.log(moment().format("L - LTS"));
+    }
+}
+
+console.log("=====================================================")
+console.log("        Adicionando Serviços \n")
+for(let i=0; i < pets.length; i++){
+    darBanhoPet(pets[i]);
+    tosarPet(pets[i]);
+    apararUnhasPet(pets[i]);
+}
