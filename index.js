@@ -57,10 +57,3 @@ const campanhaVacina = (pets) => {
 }
 
 campanhaVacina(pets);
-// const listarPets = () => {
-//     for(let pet of pets){
-//         console.log(`${pet.nome}, ${pet.peso}, ${pet.raca}`)
-//     }
-// }
-
-// listarPets();
