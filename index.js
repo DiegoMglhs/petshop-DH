@@ -107,4 +107,5 @@ for(let i=0; i < pets.length; i++){
     darBanhoPet(pets[i]);
     tosarPet(pets[i]);
     apararUnhasPet(pets[i]);
+    console.log("--------------")
 }
