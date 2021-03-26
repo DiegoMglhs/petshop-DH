@@ -1,44 +1,8 @@
 var moment = require('moment'); // require
+var pets = require('./bancoDados.json');
 
 const nomePetshop = "PETSHOP DH";
 
-let pets = [
-
-    {
-        nome: 'Floquinho',
-        tipo: 'cachorro',
-        idade: 7,
-        raca: 'Lhasa apso',
-        peso: 4,
-        tutor: 'Cebolinha',
-        contato: '(81) 998899-4545',
-        vacinado: false,
-        servicos: ['tosa']
-
-    },
-    {
-        nome: 'Percata',
-        tipo: 'cachorro',
-        idade: 2,
-        raca: 'beagle',
-        peso: 3,
-        tutor: 'Jamal',
-        contato: '(81) 979899-9568',
-        vacinado: true,
-        servicos: ['banho', 'tosa']
-    },
-    {
-        nome: 'melik',
-        tipo: 'gato',
-        idade: 4,
-        raca: 'Vira-lata',
-        peso: 2,
-        tutor: 'George',
-        contato: '(81) 99688-9568',
-        vacinado: false,
-        servicos: ['Corte de unhas']
-    }
-];
 
 const novoCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
     novoPet = {
