@@ -1,75 +1,98 @@
-var moment = require('moment'); // require
-var pets = require('./bancoDados.json');
+var moment = require('moment');
+const fs = require('fs');
+const bdPets = JSON.parse(fs.readFileSync("./bancoDados.json"));
 
-const nomePetshop = "PETSHOP DH";
+var pets = bdPets.pets;
 
+const nomePetshop = 'PETSHOP AVANADE';
 
-const novoCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
-    novoPet = {
-        nome: nome,
-        tipo: tipo,
-        idade: idade,
-        raca: raca,
-        peso: peso,
-        tutor: tutor,
-        contato: contato,
-        vacinado: vacinado,
-        servicos: []
-    }
-
-    pets.push(novoPet);
-    return pets
+const WriteJson = (pets) =>{
+    var _pets = JSON.stringify(pets, null, 2);// ,null, 2 < faz com que ao escrever no JSON já idente o código de maneira correta!
+    fs.writeFileSync('bancoDados.json', _pets, 'utf-8');
 }
 
-novoCliente('Arnaldo', 'Porco', 12, 'sem-mundial', 32, 'Guilherme', '(11) 98655-2458', false, [] );
-console.log(pets[pets.length-1]);
-const vacinarPet = (pet) => {
+const listarPets = () => {
+    for(let pet of pets){
+        console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
+        console.log("\tStatus: "+ (pet.vacinado ? "Vacinado" : "não vacinado"))
+    }
+}
+
+//console.log(listarPets());
+
+const vacinarPets = (pet) => {
     if (!pet.vacinado) {
         pet.vacinado = true;
-        console.log(`O pet  ${pet.nome} foi vacinado!`)
+        console.log(`* ${pet.nome} foi vacinado.`);
     } else {
-        console.log(`O pet ${pet.nome} já estava vacinado`);
+        console.log(`${pet.nome} já estava vacinado.`)
     }
 }
 
 const campanhaVacina = (pets) => {
-    petsParaVacinar = pets.filter(pets => pets.vacinado === false);//usado comando filter para filtrar apenas os não vacidados, mas poderia ser substituido por um for dentro do for of.
+    petsVacinados = pets.filter(pets => pets.vacinado === false);
     for(let pet of pets)
-        vacinarPet(pet);
-    console.log (`${petsParaVacinar.length}, pets foram vaciados nessa campanha!`);
+        vacinarPets(pet);
+    console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
+    WriteJson(bdPets);
 }
 
-campanhaVacina(pets);
+// campanhaVacina(pets);
+
+
+const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
+    newPet = {
+        nome, 
+        tipo, 
+        idade, 
+        raca, 
+        peso, 
+        tutor, 
+        contato, 
+        vacinado, 
+        servicos
+    }
+    pets.push(newPet);
+    WriteJson(bdPets);
+}
+
+insereCliente("Zé", "porco", 3, "Sem-Mundial", 5, "Gui", "(81) 99902-4433", false, []);
+// console.log(pets[pets.length-1]);
 
 const darBanhoPet = (pet) => {
-    if(!pet.servicos.includes('banho')){
-        pet.servicos.push('banho');
-        console.log(pet.nome+' está de banho toamdo! ')
-        console.log(moment().format("L - LTS"));
-    }
+    pet.servicos.push({
+        servico: "banho",
+        data: moment().format("L - LTS")
+    });
+    console.log(`${pet.nome} está de banho tomado!`);
 }
 
 const tosarPet = (pet) => {
-    if(!pet.servicos.includes('tosa')){
-        pet.servicos.push('tosa');
-        console.log(pet.nome + ' está com cabelinho na régua! ')
-        console.log(moment().format("L - LTS"));
-    }
+    pet.servicos.push({
+        servico: "tosa",
+        data: moment().format("L - LTS")
+    });
+    console.log(`${pet.nome} está com cabelinho na regua!`);
 }
 
 const apararUnhasPet = (pet) => {
-    if(!pet.servicos.includes('unha')){
-        pet.servicos.push('unha');
-        console.log(pet.nome + ' está com as unhas cortadas! ')
-        console.log(moment().format("L - LTS"));
-    }
+        pet.servicos.push({
+            servico: "unha",
+            data: moment().format("L - LTS")
+        });
+        console.log(`${pet.nome} está de unhas aparadas!`);
 }
 
-console.log("=====================================================")
-console.log("        Adicionando Serviços \n")
-for(let i=0; i < pets.length; i++){
-    darBanhoPet(pets[i]);
-    tosarPet(pets[i]);
-    apararUnhasPet(pets[i]);
-    console.log("--------------")
+const atenderCliente = (pet, servico) => {
+    servico(pet);
+    WriteJson(bdPets);
 }
+
+atenderCliente(pets[0], darBanhoPet);
+atenderCliente(pets[2], apararUnhasPet);
+atenderCliente(pets[1], tosarPet);
+
+// console.log("\n");
+// for (const pet of pets) {
+//     console.log(pet);
+// }
