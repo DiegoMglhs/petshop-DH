@@ -12,13 +12,28 @@ const WriteJson = (pets) =>{
 }
 
 const listarPets = () => {
-    for(let pet of pets){
+    pets.forEach(pet => {
         console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
         console.log("\tStatus: "+ (pet.vacinado ? "Vacinado" : "não vacinado"))
-    }
+    }); 
 }
 
 //console.log(listarPets());
+
+const animal = "Rex";
+
+const Buscapet = (pets) => {
+    localizador = pets.find(pets => pets.nome === animal);
+    console.log(localizador.nome);
+}
+//Buscapet(pets);
+
+var locClientes = pets.map(function(pets, nome){
+    return pets.nome;
+ });
+
+// console.log(locClientes);
+
 
 const vacinarPets = (pet) => {
     if (!pet.vacinado) {
@@ -83,16 +98,24 @@ const apararUnhasPet = (pet) => {
         console.log(`${pet.nome} está de unhas aparadas!`);
 }
 
-const atenderCliente = (pet, servico) => {
-    servico(pet);
-    WriteJson(bdPets);
+const clientePremium = (pet) => {
+    const servicos = pet.servicos.map(x => x = 1);
+    const somaServicos = servicos.reduce((sum, current) => sum + current);
+    console.log((somaServicos<10) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
 }
 
-atenderCliente(pets[0], darBanhoPet);
-atenderCliente(pets[2], apararUnhasPet);
-atenderCliente(pets[1], tosarPet);
+clientePremium(pets[0]);
 
-// console.log("\n");
-// for (const pet of pets) {
-//     console.log(pet);
+// const atenderCliente = (pet, servico) => {
+//     servico(pet);
+//     WriteJson(bdPets);
 // }
+
+// atenderCliente(pets[0], darBanhoPet);
+// atenderCliente(pets[2], apararUnhasPet);
+// atenderCliente(pets[1], tosarPet);
+
+// // console.log("\n");
+// // for (const pet of pets) {
+// //     console.log(pet);
+// // }
