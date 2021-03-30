@@ -9,7 +9,10 @@
       "tutor": "Doug",
       "contato": "(11) 98899-4545",
       "vacinado": true,
-      "servicos": ["banho", "tosa"]
+      "servicos": [
+        "banho",
+        "tosa"
+      ]
     },
     {
       "nome": "Rex",
@@ -20,7 +23,9 @@
       "tutor": "Jose",
       "contato": "(11) 98569-4145",
       "vacinado": false,
-      "servicos": ["banho"]
+      "servicos": [
+        "banho"
+      ]
     },
     {
       "nome": "Caninha",
@@ -31,7 +36,9 @@
       "tutor": "Denis",
       "contato": "(11) 97199-4215",
       "vacinado": false,
-      "servicos": ["banho"]
+      "servicos": [
+        "banho"
+      ]
     },
     {
       "nome": "Zé",
@@ -43,6 +50,21 @@
       "contato": "(81) 99902-4433",
       "vacinado": false,
       "servicos": []
+    },
+    {
+      "nome": "pedro",
+      "tipo": "Cavalo",
+      "idade": 5,
+      "raca": "Mangalarga Paulista",
+      "peso": 45,
+      "tutor": "Luizer",
+      "contato": "(81) 98568-4433",
+      "vacinado": true,
+      "servicos": [
+        "banho",
+        "tosa",
+        "banho"
+      ]
     }
   ]
 }

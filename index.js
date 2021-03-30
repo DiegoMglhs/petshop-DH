@@ -1,6 +1,6 @@
 var moment = require('moment');
 const fs = require('fs');
-const bdPets = JSON.parse(fs.readFileSync("./bancoDados.json"));
+let bdPets = JSON.parse(fs.readFileSync("./bancoDados.json"));
 
 var pets = bdPets.pets;
 
@@ -13,12 +13,13 @@ const WriteJson = (pets) =>{
 
 const listarPets = () => {
     pets.forEach(pet => {
-        console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
-        console.log("\tStatus: "+ (pet.vacinado ? "Vacinado" : "não vacinado"))
+        let {nome, idade, tipo, raca, vacinado} = pet
+        console.log(`--> ${nome}:\n\tIdade: ${idade}\n\tTipo: ${tipo}\n\tRaca: ${raca}\n`);
+        console.log("\tStatus: "+ (vacinado ? "Vacinado" : "não vacinado"))
     }); 
 }
 
-//console.log(listarPets());
+// console.log(listarPets());
 
 const animal = "Rex";
 
@@ -36,11 +37,12 @@ var locClientes = pets.map(function(pets, nome){
 
 
 const vacinarPets = (pet) => {
-    if (!pet.vacinado) {
-        pet.vacinado = true;
-        console.log(`* ${pet.nome} foi vacinado.`);
+    let {vacinado, nome} = pet
+    if (!vacinado) {
+        vacinado = true;
+        console.log(`* ${nome} foi vacinado.`);
     } else {
-        console.log(`${pet.nome} já estava vacinado.`)
+        console.log(`${nome} já estava vacinado.`);
     }
 }
 
@@ -72,14 +74,15 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
 }
 
 insereCliente("Zé", "porco", 3, "Sem-Mundial", 5, "Gui", "(81) 99902-4433", false, []);
-// console.log(pets[pets.length-1]);
+console.log(pets[pets.length-1]);
 
 const darBanhoPet = (pet) => {
     pet.servicos.push({
         servico: "banho",
         data: moment().format("L - LTS")
     });
-    console.log(`${pet.nome} está de banho tomado!`);
+    let {nome} = pet;
+    console.log(`${nome} está de banho tomado!`);
 }
 
 const tosarPet = (pet) => {
@@ -87,7 +90,8 @@ const tosarPet = (pet) => {
         servico: "tosa",
         data: moment().format("L - LTS")
     });
-    console.log(`${pet.nome} está com cabelinho na regua!`);
+    let {nome} = pet;
+    console.log(`${nome} está com cabelinho na regua!`);
 }
 
 const apararUnhasPet = (pet) => {
@@ -95,16 +99,17 @@ const apararUnhasPet = (pet) => {
             servico: "unha",
             data: moment().format("L - LTS")
         });
-        console.log(`${pet.nome} está de unhas aparadas!`);
+        let {nome} = pet;
+        console.log(`${nome} está de unhas aparadas!`);
 }
 
 const clientePremium = (pet) => {
     const servicos = pet.servicos.map(x => x = 1);
     const somaServicos = servicos.reduce((sum, current) => sum + current);
-    console.log((somaServicos<10) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
+    console.log((somaServicos>=3) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
 }
 
-clientePremium(pets[0]);
+clientePremium(pets[4]);
 
 // const atenderCliente = (pet, servico) => {
 //     servico(pet);
