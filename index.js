@@ -57,24 +57,48 @@ const campanhaVacina = (pets) => {
 // campanhaVacina(pets);
 
 
-const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
-    newPet = {
-        nome, 
-        tipo, 
-        idade, 
-        raca, 
-        peso, 
-        tutor, 
-        contato, 
-        vacinado, 
-        servicos
-    }
-    pets.push(newPet);
+const adicionarPet = (novoPet) => {
+    pets.push(...novoPet);
     WriteJson(bdPets);
+    novoPet.forEach((pet)=>{
+        let {nome} = pet;
+        console.log(`${nome} foi adicionado com sucesso!`);
+    })
 }
 
-insereCliente("Zé", "porco", 3, "Sem-Mundial", 5, "Gui", "(81) 99902-4433", false, []);
-console.log(pets[pets.length-1]);
+adicionarPet([{
+    "nome": "Bidu",
+    "tipo": "gato",
+    "idade": 3,
+    "raca": "American",
+    "peso": 28,
+    "tutor": "Doug",
+    "contato": "(11) 99999-9999",
+    "vacinado": true,
+    "servicos": []
+},
+{
+    "nome": "Eva",
+    "tipo": "gato",
+    "idade": 3,
+    "raca": "American",
+    "peso": 28,
+    "tutor": "Hendy",
+    "contato": "(11) 99999-9999",
+    "vacinado": true,
+    "servicos": []
+},
+{
+    "nome": "Tag",
+    "tipo": "gato",
+    "idade": 3,
+    "raca": "American",
+    "peso": 28,
+    "tutor": "Doug",
+    "contato": "(11) 99999-9999",
+    "vacinado": true,
+    "servicos": []
+}]);
 
 const darBanhoPet = (pet) => {
     pet.servicos.push({
@@ -109,7 +133,7 @@ const clientePremium = (pet) => {
     console.log((somaServicos>=3) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
 }
 
-clientePremium(pets[4]);
+// clientePremium(pets[4]);
 
 // const atenderCliente = (pet, servico) => {
 //     servico(pet);
